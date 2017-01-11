@@ -3,3 +3,6 @@ lein run
 
 #Build the jar, have some pickles
 lein uberjar
+
+#Do some repling
+lein repl
