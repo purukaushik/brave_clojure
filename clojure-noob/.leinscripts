@@ -1,0 +1,5 @@
+#Run stuff. mvn run like
+lein run
+
+#Build the jar, have some pickles
+lein uberjar
