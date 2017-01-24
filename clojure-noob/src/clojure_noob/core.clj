@@ -117,3 +117,17 @@ my-map
 ;; sets would need contains
 (contains? #{:a :b} :a)
 (contains? #{:a :b} :c)
+
+;; Data structures recap -> lists, vectors, sets, hashmaps, keywords
+
+;; Functions
+
+;; vv cooky vv
+((or + -) 1 2 3)
+;; what happens ^^ here is currying. + is a ref to the (+) function
+;; or returns the first truthy value. here + is truthy.
+
+;; in a similar vein
+((and (= 1 1) +) 1 2 3)
+((and (= 0 1) +) 1 2 3)
+
