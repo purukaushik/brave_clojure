@@ -131,3 +131,9 @@ my-map
 ((and (= 1 1) +) 1 2 3)
 ((and (= 0 1) +) 1 2 3)
 
+(defn this-guitar
+  "Kills fascists"
+  [name]
+  (str "This guitar " name " -> kills fascists"))
+
+(this-guitar "does what?")
