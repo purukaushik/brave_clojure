@@ -1,6 +1,7 @@
 ;; Run all examples here with C-x C-e after last S-exp on emacs with clojure mode and cider
 
 (ns clojure-noob.core
+  (:require [clojure.string :as string])
   (:gen-class))
 
 (defn -main
@@ -137,3 +138,53 @@ my-map
   (str "This guitar " name " -> kills fascists"))
 
 (this-guitar "does what?")
+
+;; multiple parameters epdi raaa!!
+(defn gcd
+  "Euclidean gcd algorithm. Take two return one int."
+  [a b]
+  (if (= b 0) a (gcd b (mod a b))))
+
+(defn lcm
+  "UnEuclidean lcm algorithm. Take two return one int."
+  [a b]
+  (/ (* a b) (gcd a b)))
+
+;; multiple- arity; gives us some optionsssss
+(defn x-chop
+  "Some bloody nosed chop that"
+  ([name chop-type]
+   (str "Kai! " chop-type " Kuthadi kuthadi " name ". Kuninju kuthadi " name "."))
+  ([name]
+   (x-chop name "karate")))
+(x-chop "sailaka")
+(x-chop "sailaka" "Seeman says: ")
+
+;; destructuring
+(defn my-first
+  [[first-thing]]
+  first-thing)
+
+;; first and rest of var args
+(defn my-favorite-things
+  [first & rest]
+  (str "Hi " first ", -> " (string/join rest))
+  )
+(my-favorite-things "Dorie" "Dora" "buji")
+
+;; map destructurer
+(defn map-location
+  [{lat :lat lng :lng}]
+  (string/join lat lng))
+(def co-ords {:lat -33.1325 :long 23.2326})
+(map-location co-ords)
+
+;; clojure fn body
+(defn illustrated-fn
+  []
+  (def st "does nothing")
+  (def i 5)
+  (def k (* i i))
+  (str "this function " st " but return " k)
+  )
+(illustrated-fn)
