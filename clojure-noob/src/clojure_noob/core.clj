@@ -188,3 +188,56 @@ my-map
   (str "this function " st " but return " k)
   )
 (illustrated-fn)
+
+;; a recursive looper function
+(defn looper
+  [i]
+  (println i)
+  (if (= i 0) 0 (looper (- i 1))))
+
+(looper 5) ;; hmmm..that didn't work as expected. we need to yield like python
+
+;; loop sum
+(defn loop-sum
+  [a,x]
+  (if (= x 0) a (loop-sum (+ a x) (- x 1))))
+
+(loop-sum 0 10)
+
+;; first let's see lambdas -> (fn [x...] )
+(map (fn [x] (* x x))
+     [0 1 2 3 4 5])
+;; more compact lambda
+(#(* % %) 77)
+
+;; multi-grain big turkeys
+(#(+ %1 %2) 500 3)
+
+
+;; classic exponentiation
+(defn exp [x n]
+  (if (zero? n) 1
+      (* x (exp x (dec n)))))
+(exp 2 4)
+
+;;returning functions
+(defn -maker
+  [a]
+  #(* (exp %1 %2) a))
+
+;; cannot partially apply -> ((-maker 3) 5)
+((-maker 3) 2 5)
+
+;; say f(x) = 3*x^n = 3 * -maker(x,n)
+(defn fofx [x n]
+ ((-maker 3) x n))
+
+;; computing with x=2, n=5
+(fofx 2 5)
+
+;; curried sum of squares
+(defn sum-of-range-sq [f b y]
+  (defn loop [a x]
+    (if (= x 0) a (loop (+ (f x) a) (- x 1))))
+    (loop b y))
+(sum-of-range-sq (fn [x] (* x x)) 0 5)
