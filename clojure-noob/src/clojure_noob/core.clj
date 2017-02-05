@@ -241,3 +241,10 @@ my-map
     (if (= x 0) a (loop (+ (f x) a) (- x 1))))
     (loop b y))
 (sum-of-range-sq (fn [x] (* x x)) 0 5)
+
+;; clojure (loop) and (recur)
+(loop [iter 0] ;; loop variable -> the int i=0 part of a java for loop
+  (println (str "Iteration_" iter)) ;; for body
+  (if (> iter 5) ;; loop invariant check; the i<5 part of a java for loop
+    (println "Bye!")
+    (recur (inc iter)))) ;; i++ part
