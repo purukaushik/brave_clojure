@@ -48,4 +48,22 @@
 
 (abs-2-by-3 [16 15 30 43])
 
-;;now back to the course
+;; now back to the course
+
+;; memoization of function results through `memoize`
+;; for programs that take longer to run
+(defn sleepy-identify
+  [x]
+  (Thread/sleep 3000)
+  x)
+
+(def memo-sleepy-identify (memoize sleepy-identify))
+
+(time (memo-sleepy-identify "Free Snowden!")) ;; 3 seconds
+
+(time (memo-sleepy-identify "Free Snowden!")) ;; immediately
+
+(time (memo-sleepy-identify "Free Cenk!")) ;; again 3 seconds
+
+
+
