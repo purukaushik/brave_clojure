@@ -114,3 +114,6 @@
               (partial filter #(mod3nz? %)))
    xs))
 (abs-2-by-3-composured [16 15 30 43]) ;; works! yahoo
+
+;; exercise 2. implement `assoc-in` function
+;; syntax from clojure-docs ~> 
