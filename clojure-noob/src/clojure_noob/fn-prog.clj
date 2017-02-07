@@ -65,5 +65,52 @@
 
 (time (memo-sleepy-identify "Free Cenk!")) ;; again 3 seconds
 
+((comp inc) 6)
 
+;; exercises
+;; 1. implement comp
+;; (comp) (comp f) (comp f g) (comp f g & fs)
+(defn composure
+  ([f] f)
+  ([f g] #(f (g %)))
+  ([f g & fs]
+   (reduce composure (list* f g fs))))
+   
+;; two function composure
+((composure #(mod % 10) inc) 19)
 
+;; regular comp for comparision
+((comp #(mod % 10) inc) 19)
+
+;; multi-function compsure
+((comp #(mod % 5) #(mod % 7) inc) 15)
+((composure #(mod % 5) #(mod % 7) inc) 15)
+
+;; two function multi-args
+(def map-to-pair (map identity {:1 "Sun" :2 "Mercury" :3 "Venus"}))
+(def planets {:1 "Sun" :2 "Mercury" :3 "Venus" :4 "Earth"
+              :5 "Mars" :6 "Jupiter" :7 "Saturn" :8 "Uranus" :9 "Neptune"
+              })
+
+;; let's go back to our earlier comp example with map filter mixins
+;; x%3 != 0 ?
+(defn mod3nz? [x]
+  ((comp not zero? mod) x 3))
+
+;; composing map, filter.
+
+(defn abs-2-by-3
+  "Takes a seq of numbers, filters those not divisible by 3 and muls them by 2"
+  [xs]
+  ((comp (partial map #(* % 2))
+        (partial filter #(mod3nz? %)))
+   xs))
+
+(abs-2-by-3 [16 15 30 43])
+
+(defn abs-2-by-3-composured
+  [xs]
+  ((composure (partial map #(* % 2))
+              (partial filter #(mod3nz? %)))
+   xs))
+(abs-2-by-3-composured [16 15 30 43]) ;; works! yahoo
