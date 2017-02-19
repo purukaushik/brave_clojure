@@ -17,4 +17,3 @@
 
 (create-ns 'clojure.noob.organize.nns)
 (in-ns 'clojure.noob.organize.nns)
-
